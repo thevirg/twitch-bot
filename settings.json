@@ -1,0 +1,19 @@
+{
+    "irc": {
+        "channel": "whitesmoke08",
+        "token": "kzz8bh3wntowyn16tonyw57wkgxs43",
+        "scopes": "chat:read+chat:edit"
+    },
+    "api": {
+        "client_id": "q6batx0epp608isickayubi39itsckt",
+        "token": "kzz8bh3wntowyn16tonyw57wkgxs43",
+        "scopes": "channel:read:editors+user:read:email"
+    },
+    "logging": {
+        "level": 20
+    },
+    "settings": {
+        "volume": 80,
+        "font-size": 11
+    }
+}
