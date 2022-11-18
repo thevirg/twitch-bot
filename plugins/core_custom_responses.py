@@ -60,50 +60,50 @@ def erase_response_from_file(trigger: str, file=CUSTOM_RESPONSES_FILE) -> bool:
     return False
 
 
-@BOT.decorator(['!add'], access=1)
-def command_add_custom_responses(message: Message):
-    """Decorates a new function while saving them.
-
-    Args:
-        message (Message): !add <command> <response>
-    """
-    # TODO
-    # Save entire function as-is, so that some data can be persistent,
-    # such as counters or whatever.
-    commands = message.message.split()
-    m = message.message
-
-    if len(commands) < 3:
-        BOT.send_message('Syntax: !add <command> <text response>')
-        return
-
-    command = commands[1].lower()
-    response = m[len(commands[0])+len(commands[1])+2:]
-
-    # https://www.codementor.io/@arpitbhayani/overload-functions-in-python-13e32ahzqt
-    # When overloading the same name, a new function is created entirely. check id().
-    # Python will not loose its memory address since it's being referenced elsewhere.
-    @BOT.decorator([command])
-    def custom_function(_):
-        BOT.send_message(response)
-
-    result = save_response_file({'command': command, 'response': response})
-    BOT.send_message(f'"{command}" {result}! \U0001F4BE')
-
-
-@BOT.decorator(['!remove', '!erase', '!del'], access=1)
-def command_remove_custom_responses(message: Message):
-    commands = message.message.split()
-    if len(commands) < 2:
-        BOT.send_message('Syntax: !remove <!command>')
-        return
-    result = erase_response_from_file(commands[1])
-
-    for handler in BOT.handlers:
-        if commands[1] in handler['commands']:
-            BOT.handlers.remove(handler)
-
-    BOT.send_message(f'{commands[1]} {"deleted!" if result else "not found!"}')
+# @BOT.decorator(['!add'], access=1)
+# def command_add_custom_responses(message: Message):
+#     """Decorates a new function while saving them.
+#
+#     Args:
+#         message (Message): !add <command> <response>
+#     """
+#     # TODO
+#     # Save entire function as-is, so that some data can be persistent,
+#     # such as counters or whatever.
+#     commands = message.message.split()
+#     m = message.message
+#
+#     if len(commands) < 3:
+#         BOT.send_message('Syntax: !add <command> <text response>')
+#         return
+#
+#     command = commands[1].lower()
+#     response = m[len(commands[0])+len(commands[1])+2:]
+#
+#     # https://www.codementor.io/@arpitbhayani/overload-functions-in-python-13e32ahzqt
+#     # When overloading the same name, a new function is created entirely. check id().
+#     # Python will not loose its memory address since it's being referenced elsewhere.
+#     @BOT.decorator([command])
+#     def custom_function(_):
+#         BOT.send_message(response)
+#
+#     result = save_response_file({'command': command, 'response': response})
+#     BOT.send_message(f'"{command}" {result}! \U0001F4BE')
 
 
-create_responses_from_file()
+# @BOT.decorator(['!remove', '!erase', '!del'], access=1)
+# def command_remove_custom_responses(message: Message):
+#     commands = message.message.split()
+#     if len(commands) < 2:
+#         BOT.send_message('Syntax: !remove <!command>')
+#         return
+#     result = erase_response_from_file(commands[1])
+#
+#     for handler in BOT.handlers:
+#         if commands[1] in handler['commands']:
+#             BOT.handlers.remove(handler)
+#
+#     BOT.send_message(f'{commands[1]} {"deleted!" if result else "not found!"}')
+#
+#
+# create_responses_from_file()

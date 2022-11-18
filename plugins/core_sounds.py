@@ -31,14 +31,14 @@ def create_sounds(sounds: list):
         LOGGER.debug('Sound %s created.', sound)
 
 
-@BOT.decorator(['!sounds'])
-def command_replysounds(message: Message):
-    message = ''
-
-    for sound in sorted(SOUNDS):
-        message += f'!{sound[:-4].lower()}, '
-    message = message[:-2] + ' KappaKappa'
-    BOT.send_message(message)
+# @BOT.decorator(['!sounds'])
+# def command_replysounds(message: Message):
+#     message = ''
+#
+#     for sound in sorted(SOUNDS):
+#         message += f'!{sound[:-4].lower()}, '
+#     message = message[:-2] + ' KappaKappa'
+#     BOT.send_message(message)
 
 
 def play_sound(sound: AudioPlayer) -> None:
